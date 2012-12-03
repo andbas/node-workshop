@@ -1,0 +1,11 @@
+doctype 5
+html
+  head
+    title= title
+  body
+    div.users
+      each user in users
+        //TODO render a users list. Result should looks like "<div> <a href="/users/bob">bob</a>'s score is 1000</div>"
+        div 
+          a(href='/users/'+user.name)=user.name
+          | 's score is #{user.score}
