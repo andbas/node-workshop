@@ -1,0 +1,72 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/socket.io/socket.io.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+    script
+      $(document).ready(function(){
+        var socket = io.connect('http://localhost:1337/');
+        
+        socket.on('user-msg', message);
+        
+        socket.on('announcement', function(announce){
+          console.log('announcement');
+          message('System', announce);
+        });
+        
+        socket.on('users-online', function(nicknames){
+          var onlineUsersElement = $('#users-online').empty().append($('<span>Online: </span>'));
+          for (var i in nicknames) {
+            onlineUsersElement.append($('<b>').addClass('nickname').text(nicknames[i]));
+          }
+        });
+        
+        function message (from, msg) {
+          $('#messages').append($('<p>').append($('<b>').addClass('nickname').text(from), msg));
+          $("#messages").scrollTop($("#messages")[0].scrollHeight);
+        }
+        
+        function clear () {
+          $('#msg').val('').focus();
+        };
+        
+        // Forms binding
+        $('#set-nickname').submit(function(e){
+          socket.emit('nickname', $('#nick').val(), function(success){
+            if(success){
+              $('#login').hide();
+              $('#dialog').show();
+              clear();
+            } else {
+              $('#nickname-err').show();
+            }
+          });
+          return false;
+        });
+        
+        $('#send-message').submit(function(e){
+          var msg = $('#msg').val();
+          message('me', msg);
+          socket.emit('user-msg', msg);
+          clear();
+          return false;
+        });  
+
+        
+      });
+  body
+    #container
+      #login
+        form#set-nickname
+          p Please type in your nickname and press enter.
+          input#nick(autofocus='autofocus')
+          p#nickname-err Nickname already in use
+      #dialog
+        #chat
+          #users-online 
+          #messages
+        form#send-message
+          input#msg
+          button#send(type='submit') send

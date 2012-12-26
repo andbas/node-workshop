@@ -1,0 +1,77 @@
+html, body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #344848;
+}
+
+#container {
+  width: 640px;
+  padding: 0;
+  border: 1px solid #e5e5e5;
+}
+
+.nickname {
+  padding: 0 5px;
+}
+
+#login {
+  height: 100%;
+  text-align: center;
+}
+
+#nickname-err {
+  display: none;
+  color: #f00;
+}
+
+#set-nickname input {
+  
+}
+
+#users-online {
+  padding: 10px;
+  background: #efefef;
+}
+
+#dialog {
+  display: none;
+}
+
+#chat {
+  
+}
+
+#messages {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 380px
+}
+
+#messages p {
+  margin: 4px 0;
+}
+
+#messages p:nth-child(even) {
+  background: #f6f6f6;
+}
+
+#send-message {
+  position: relative;
+}
+
+input#msg {
+  margin: 0;
+  padding: 0 5px;
+  width: 630px;
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  height: 24px;
+  line-height: 24px;
+  position: relative;
+}
+
+#send {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
