@@ -10,19 +10,24 @@ html
         socket.on('status', function(data){
           $('#status').html(data.message);  
         });
-        socket.on('broadcasting',function(data){
-          $('#messages').append('<div class="line">' + data.msg + '</div>');  
+        
+        
+        
+        $('#date-request-button').click( function() {
+          //TODO emit 'date-request' message to server with callback (acknowledgement) function
+          //Hint: Callback function will looks exactly as handler for 'date-response' event from 05_socket_basics/views/index.jade
         });
+        
+        //TODO add handler for socket.io event 'broadcasting' event which will append recieved date to #message div
+        //Hint: it will include data which looks like {msg: 'message from servers'}
+        //Hint 2: take a look jQuery append from previous example (05_socket_basics)
+        
         $('#broadcast-others').click( function() {
-          socket.emit('broadcast',{ to: 'others', msg: $('#msg').val() });
+          //TODO emit 'broadcast' event and send object with 'to' and 'msg' fields. Please set value for 'to' as string 'others', 'msg' field you can get from #msg input. 
+          //Hint: To retrieve value you can use $('#msg').val() call
         });
         $('#broadcast-everyone').click( function() {
-          socket.emit('broadcast', { to: 'everyone', msg: $('#msg').val() });
-        });
-        $('#date-request-button').click( function() {
-          socket.emit('date-request','',function(data){
-            $('#messages').append('<div class="line">' + data.date + '</div>');  
-          });
+          //TODO emit 'broadcast' event and send object with 'to' and 'msg' fields. Please set value for 'to' as string 'everyone', 'msg' field you can get from #msg input. 
         });
         
       });

@@ -20,15 +20,15 @@ server.listen(app.get('port'), function(){
 
 io.sockets.on('connection', function(socket) {
   socket.emit('status',{ message: "OK" });
-  socket.on('date-request', function(data, ack){
+  
+  //TODO rework 'data-request' handler to work with callback (acknowledgement) function instead of emit 'date-response' event
+  //Hint: http://pastebin.com/2G9yA4Ka
+  socket.on('date-request', function(data){
     var current = new Date();
-    ack({ date: current.toString() });
+    socket.emit('date-response',{ date: current.toString() });
   });
-  socket.on('broadcast', function(data){
-    if(data.to === 'others'){
-      socket.broadcast.emit('broadcasting', {msg: data.msg});
-    } else {
-      io.sockets.emit('broadcasting', {msg: data.msg});
-    }
-  });
+  
+  //TODO write a 'broadcast' event handler
+  //Hint: 'to' field of received object could be 'everyone' or 'others'
+  //Hint 2: http://pastebin.com/a37R1b50
 });
