@@ -2,21 +2,16 @@ doctype 5
 html
   head
     title= title
-    script(src='/socket.io/socket.io.js')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+    //TODO Load socket.io library from a local server (hint: '/socket.io/socket.io.js')
     script
       $(document).ready(function(){
-        var socket = io.connect('http://localhost:1337/');
-        socket.on('status', function(data){
-          $('#status').html(data.message);  
-        });
-        socket.on('date-response',function(data){
-          $('#messages').append('<div class="line">' + data.date + '</div>');  
-        });
+        //TODO Create a socket and make a connection to a socket.io server (localhost) 
+        //TODO Write handler for 'status' event which should replace using $('#status').html(msg) status message, where msg is a message recieved from server
+        //TODO Write handler for 'date-response' event which should add date recieved from server into #messages div (hint: $('#messages').append('<div class="line">' + data.date + '</div>');)
         $('#date-request-button').click( function() {
-          socket.emit('date-request');
+          //TODO Emit 'date-request' message to server
         });
-        
       });
   body
     #status

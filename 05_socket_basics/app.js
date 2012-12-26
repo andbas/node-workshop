@@ -1,7 +1,7 @@
 var express = require('express')
   , app = express()
-  , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server);
+  //TODO add necessary declarations
+  ;
 	
 app.configure(function(){
   app.set('port', process.env.PORT || 1337);
@@ -14,14 +14,14 @@ app.get('/',function(req, res){
   res.render('index', {title:'Socket.io basics'});
 });
 
-server.listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
+//TODO declare a port and add listener for server start event
 
 io.sockets.on('connection', function(socket) {
-  socket.emit('status',{ message: "OK" });
-  socket.on('date-request', function(data){
-    var current = new Date();
-    socket.emit('date-response',{ date: current.toString() });
-  });
+  //Handle Socket's connection event
+  
+  //TODO emit 'status' message (send object with fields 'message')
+  
+  //TODO add listener to a socket event 'date-request'
+  
+    //TODO get current date and emit it to user as 'date-response' request
 });

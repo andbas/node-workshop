@@ -12,8 +12,6 @@ app.configure(function(){
   app.set('view engine', 'jade');
   //TODO Add application logger
   // hint: http://expressjs.com/api.html#app.use
-  //SHOULD_BE_REMOVED
-  app.use(express.logger('dev'));
 });
 
 app.get('/',function(req, res){
@@ -23,18 +21,13 @@ app.get('/',function(req, res){
 app.get('/users/:name',function(req, res) {
   //TODO populate username variable with date recieved from :name param
   // hint: http://expressjs.com/api.html#req.params
-  //SHOULD_BE_REMOVED req.param('name');
-  var username = req.param('name');
+  
+  var username = ...;
   
   //TODO render logic using findUserByName(username, callback)
   // hint: http://expressjs.com/api.html#res.render
-  //SHOULD_BE_REMOVED 
   findUserByName(username, function(err, user){
-    if(user){
-	  res.render('user/show',{ title: 'User statistics', user: user}); 
-	} else {
-	  res.redirect('/');
-	}
+
   });
 });
 
