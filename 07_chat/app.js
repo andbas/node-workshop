@@ -42,12 +42,10 @@ io.sockets.on('connection', function(socket) {
   });
   
   socket.on('disconnect', function(){
-    socket.get('nickname', function(err, nick) {
-      if(nick){
-        delete nicknames[nick];
-        socket.broadcast.emit('announcement', nick + ' disconnected');
-        socket.broadcast.emit('users-online', nicknames);
-      }      
-    });  
+    //TODO handle user disconnect
+    //Hint: check is user already enter a nickname and was logged in
+    //Hint 2: remove user from nicknames
+    //Hint 3: make announcement
+    //Hint 4: send updated list of users to everyone
   });
 });
